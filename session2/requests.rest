@@ -1,0 +1,7 @@
+GET http://localhost:8082/currencies
+###
+GET http://localhost:8082/currencies/gbpp
+###
+GET http://localhost:8082/posts/1234/comments/56789
+###
+GET http://localhost:8082/currencies?min_value=0.01&max_value=1000
