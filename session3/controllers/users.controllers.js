@@ -1,4 +1,5 @@
 const { data } = require("../users.json");
+const { validGenders } = require("../config/config");
 
 const getUsers = (req, res) => {
   res.send(data);
@@ -16,6 +17,12 @@ const getUserById = (req, res) => {
 
 const searchUsers = (req, res) => {
   const { gender, age } = req.query;
+
+  if (gender && !validGenders.includes(gender))
+    return res
+      .status(400)
+      .send({ message: `Gender must be one of: ${validGenders.join(", ")}` });
+
   if (gender && age)
     res.send(
       data.filter(
