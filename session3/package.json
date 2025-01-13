@@ -12,9 +12,11 @@
   "type": "commonjs",
   "description": "",
   "devDependencies": {
+    "dotenv": "^16.4.7",
     "nodemon": "^3.1.9"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "joi": "^17.13.3"
   }
 }
