@@ -11,10 +11,13 @@ Authorization: LetMeIn
 ###
 GET http://localhost:8082/users/abcd
 ###
-GET http://localhost:8082/users/search?gender=49&age=male
+GET http://localhost:8082/users/search?gender=male
+Authorization: LetMeIn
 ###
 GET http://localhost:8082/users/search?gender=male
+Authorization: LetMeIn
 ###
 GET http://localhost:8082/users/search?age=49
+Authorization: LetMeIn
 ###
 GET http://localhost:8082/users/search
