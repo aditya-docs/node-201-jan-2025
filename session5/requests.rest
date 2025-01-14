@@ -1,0 +1,30 @@
+GET http://localhost:8082/currencies
+###
+GET http://localhost:8082/currencies/gbp
+###
+GET http://localhost:8082/posts/1234/comments/56789
+###
+GET http://localhost:8082/currencies?min_value=0.001
+###
+GET http://localhost:8082/users
+Authorization: LetMeIn
+###
+GET http://localhost:8082/users/abcd
+###
+GET http://localhost:8082/users/search?gender=male
+Authorization: LetMeIn
+###
+GET http://localhost:8082/users/search?gender=male
+Authorization: LetMeIn
+###
+GET http://localhost:8082/users/search?age=49
+Authorization: LetMeIn
+###
+GET http://localhost:8082/users/search
+###
+POST http://localhost:8082/blogs/new
+Content-Type: application/json
+
+{
+    "title": ["blog", "nice"]
+}
