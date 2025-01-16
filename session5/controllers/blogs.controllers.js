@@ -21,4 +21,49 @@ const createBlog = async (req, res) => {
   }
 };
 
-module.exports = { createBlog };
+const getBlogs = async (req, res) => {
+  try {
+    res.send(await Blog.find());
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Something went wrong, please try again!", error });
+  }
+};
+
+const getBlogById = async (req, res) => res.send(req.blog);
+
+const deleteBlogById = async (req, res) => {
+  const { blogId } = req.params;
+  try {
+    await Blog.findByIdAndDelete(blogId);
+    res.sendStatus(204);
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Something went wrong, please try again!", error });
+  }
+};
+
+const updateBlogById = async (req, res) => {
+  const { blogId } = req.params;
+  try {
+    const updatedBlog = await Blog.findByIdAndUpdate(blogId, req.body, {
+      // returnDocument: "after",
+      new: true,
+    });
+    res.send(updatedBlog);
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Something went wrong, please try again!", error });
+  }
+};
+
+module.exports = {
+  createBlog,
+  getBlogs,
+  getBlogById,
+  deleteBlogById,
+  updateBlogById,
+};

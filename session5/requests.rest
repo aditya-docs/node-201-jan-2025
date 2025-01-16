@@ -26,5 +26,19 @@ POST http://localhost:8082/blogs/new
 Content-Type: application/json
 
 {
-    "title": ["blog", "nice"]
+    "title": "Blog on Liverpool"
+}
+###
+GET http://localhost:8082/blogs
+###
+GET http://localhost:8082/blogs/6789291c8b48ca9159c1a76f
+###
+DELETE http://localhost:8082/blogs/6789291c8b48ca9159c1a76f
+###
+PATCH http://localhost:8082/blogs/6789291c8b48ca9159c1a76f
+Content-Type: application/json
+
+{
+    "author": ["stevie g", "jamie c"],
+    "content": "Liverpool is the home of football in England."
 }
