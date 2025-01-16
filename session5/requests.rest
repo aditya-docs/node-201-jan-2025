@@ -26,7 +26,7 @@ POST http://localhost:8082/blogs/new
 Content-Type: application/json
 
 {
-    "title": "Blog on Liverpool"
+    "title": "Blog on Brighton"
 }
 ###
 GET http://localhost:8082/blogs
@@ -35,10 +35,9 @@ GET http://localhost:8082/blogs/6789291c8b48ca9159c1a76f
 ###
 DELETE http://localhost:8082/blogs/6789291c8b48ca9159c1a76f
 ###
-PATCH http://localhost:8082/blogs/6789291c8b48ca9159c1a76f
+PATCH http://localhost:8082/blogs/678931c182922d7d0e401c72
 Content-Type: application/json
 
 {
-    "author": ["stevie g", "jamie c"],
-    "content": "Liverpool is the home of football in England."
+    "author": ["alan shearer", "isak"]
 }
