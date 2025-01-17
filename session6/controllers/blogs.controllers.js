@@ -60,10 +60,63 @@ const updateBlogById = async (req, res) => {
   }
 };
 
+// const searchBlogs = async (req, res) => {
+//   const { title, author } = req.query;
+//   // const titleRegex = new RegExp(title, "i");
+//   // res.send(await Blog.find({ title: titleRegex }));
+
+//   // OR
+
+//   // const titleRegex = new RegExp(title, "i"); // regex/pattern contains the flags/options
+//   // const titleQuery = { title: { $regex: titleRegex } };
+
+//   // OR
+
+//   // const titleRegex = new RegExp(title); // regex/pattern doesn't contain the flags/options
+//   // const titleQuery = { title: { $regex: titleRegex, $options: "i" } };
+
+//   // res.send(await Blog.find(titleQuery));
+//   // const authorEmailQuery = {
+//   //   author: {
+//   //     $elemMatch: { email: author },
+//   //   },
+//   // };
+//   // const authorRegex = new RegExp(author, "i");
+//   // const authorNameQuery = {
+//   //   author: {
+//   //     $elemMatch: { fullName: authorRegex },
+//   //   },
+//   // };
+// };
+
+const searchBlogs = async (req, res) => {
+  const { title, author } = req.query;
+
+  const titleRegex = new RegExp(title); // regex/pattern doesn't contain the flags/options
+  const titleQuery = {
+    title: { $regex: titleRegex, $options: "i" },
+  };
+  const authorQuery = {
+    author: {
+      $elemMatch: { email: author },
+    },
+  };
+
+  if (title && author)
+    return res.send(await Blog.find({ $and: [titleQuery, authorQuery] }));
+  else if (title) return res.send(await Blog.find(titleQuery));
+  else if (author) return res.send(await Blog.find(authorQuery));
+  else
+    res.status(400).send({
+      message: `At least one of 'title' or 'author' is needed to search blogs!`,
+    });
+};
+
 module.exports = {
   createBlog,
   getBlogs,
   getBlogById,
   deleteBlogById,
   updateBlogById,
+  searchBlogs,
 };

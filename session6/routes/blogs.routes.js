@@ -5,11 +5,13 @@ const {
   getBlogById,
   deleteBlogById,
   updateBlogById,
+  searchBlogs,
 } = require("../controllers/blogs.controllers");
 const findBlogByIdAndAttach = require("../middlewares/findAndAttachBlog");
 
 router.post("/new", createBlog);
 router.get("/", getBlogs);
+router.get("/search", searchBlogs);
 
 router
   .route("/:blogId") // clubbing of the routes

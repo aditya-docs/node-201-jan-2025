@@ -48,3 +48,13 @@ Content-Type: application/json
 {
     "author": ["alan shearer", "isak"]
 }
+###
+GET http://localhost:8082/blogs/search?title=blog&author=danny
+###
+GET http://localhost:8082/blogs/search?title=Blog%20on%20Liverpool
+###
+GET http://localhost:8082/blogs/search?title=chelsea
+###
+GET http://localhost:8082/blogs/search?author=
+###
+GET http://localhost:8082/blogs/search
