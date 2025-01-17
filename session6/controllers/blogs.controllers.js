@@ -1,12 +1,10 @@
-const Blog = require("../models/blog.model");
+const BlogService = require("../services/blogs.service");
+const BlogServiceInstance = new BlogService();
 
 const createBlog = async (req, res) => {
   try {
-    // const newBlog = await Blog.create(req.body);
-    // OR
-    const newBlog = new Blog(req.body);
-    await newBlog.save();
-
+    const newBlog = BlogServiceInstance.create(req.body);
+    await BlogServiceInstance.save(newBlog);
     res.status(201).send(newBlog);
   } catch (error) {
     if (error.name === "ValidationError")
@@ -23,7 +21,7 @@ const createBlog = async (req, res) => {
 
 const getBlogs = async (req, res) => {
   try {
-    res.send(await Blog.find());
+    res.send(await BlogServiceInstance.getAll());
   } catch (error) {
     res
       .status(500)
@@ -36,7 +34,7 @@ const getBlogById = async (req, res) => res.send(req.blog);
 const deleteBlogById = async (req, res) => {
   const { blogId } = req.params;
   try {
-    await Blog.findByIdAndDelete(blogId);
+    await BlogServiceInstance.deleteById(blogId);
     res.sendStatus(204);
   } catch (error) {
     res
@@ -48,10 +46,7 @@ const deleteBlogById = async (req, res) => {
 const updateBlogById = async (req, res) => {
   const { blogId } = req.params;
   try {
-    const updatedBlog = await Blog.findByIdAndUpdate(blogId, req.body, {
-      // returnDocument: "after",
-      new: true,
-    });
+    const updatedBlog = await BlogServiceInstance.updateById(blogId, req.body);
     res.send(updatedBlog);
   } catch (error) {
     res
@@ -91,25 +86,11 @@ const updateBlogById = async (req, res) => {
 
 const searchBlogs = async (req, res) => {
   const { title, author } = req.query;
-
-  const titleRegex = new RegExp(title); // regex/pattern doesn't contain the flags/options
-  const titleQuery = {
-    title: { $regex: titleRegex, $options: "i" },
-  };
-  const authorQuery = {
-    author: {
-      $elemMatch: { email: author },
-    },
-  };
-
-  if (title && author)
-    return res.send(await Blog.find({ $and: [titleQuery, authorQuery] }));
-  else if (title) return res.send(await Blog.find(titleQuery));
-  else if (author) return res.send(await Blog.find(authorQuery));
-  else
-    res.status(400).send({
-      message: `At least one of 'title' or 'author' is needed to search blogs!`,
-    });
+  const result = await BlogServiceInstance.searchByTitleOrAuthor(title, author);
+  if (result) return res.send(result);
+  res
+    .status(400)
+    .send({ message: `At least one of 'title' or 'author' is required` });
 };
 
 module.exports = {

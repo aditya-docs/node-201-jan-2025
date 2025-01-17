@@ -26,35 +26,39 @@ POST http://localhost:8082/blogs/new
 Content-Type: application/json
 
 {
-    "title": "Blog on Manali",
+    "title": "Blog on Edinburgh",
     "author": [
         {
-            "fullName": "jim corbett",
-            "email": "jim@bbc.com",
-            "image": "http://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
+            "fullName": "Paras Khandelwal",
+            "email": "paras@jpmc.com"
         }
     ]
 }
 ###
 GET http://localhost:8082/blogs
 ###
-GET http://localhost:8082/blogs/6789291c8b48ca9159c1a76f
+GET http://localhost:8082/blogs/678a87dc8faffba35d7fb4f1
 ###
-DELETE http://localhost:8082/blogs/6789291c8b48ca9159c1a76f
+DELETE http://localhost:8082/blogs/678a87dc8faffba35d7fb4f1
 ###
-PATCH http://localhost:8082/blogs/678931c182922d7d0e401c72
+PATCH http://localhost:8082/blogs/67893733adee8df6eb86d479
 Content-Type: application/json
 
 {
-    "author": ["alan shearer", "isak"]
+    "author": [
+      {
+        "fullName": "Kaoru Mitoma",
+        "email": "mitoma@bfc.com"
+      }
+    ]
 }
 ###
-GET http://localhost:8082/blogs/search?title=blog&author=danny
+GET http://localhost:8082/blogs/search?title=blog&author=mitoma@bfc.com
 ###
 GET http://localhost:8082/blogs/search?title=Blog%20on%20Liverpool
 ###
 GET http://localhost:8082/blogs/search?title=chelsea
 ###
-GET http://localhost:8082/blogs/search?author=
+GET http://localhost:8082/blogs/search?author=mitoma@bfc.com
 ###
 GET http://localhost:8082/blogs/search
