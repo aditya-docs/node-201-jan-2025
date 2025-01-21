@@ -23,8 +23,15 @@ const postLogin = async (req, res) => {
       password,
       user.password
     );
-    if (isLoggedIn) return res.status(200).send({ isLoggedIn });
-    res.sendStatus(401);
+    if (!isLoggedIn) return res.sendStatus(401);
+    res
+      .status(200)
+      .cookie(
+        "remember_user_token",
+        AuthServiceInstance.generateJwt({ userId: user._id }),
+        { maxAge: 15 * 60 * 1000 }
+      )
+      .send({ isLoggedIn });
   } catch (error) {
     console.log(error);
     res.sendStatus(401);
