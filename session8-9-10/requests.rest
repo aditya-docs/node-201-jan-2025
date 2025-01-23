@@ -16,12 +16,15 @@ Content-Type: application/json
 POST http://localhost:8082/auth/login
 Content-Type: application/json
 
-{
-    "username": "cr7",
-    "password": "GOAT@007"
-}
-
 # {
-#     "username": "lm10",
-#     "password": "GOATmid@10"
+#     "username": "cr7",
+#     "password": "GOAT@007"
 # }
+
+{
+    "username": "lm10",
+    "password": "GOATmid@10"
+}
+###
+GET http://localhost:8082/user/lm10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhmYmFjNTEwMjc1ZDg5MjdlNGE4MTciLCJpYXQiOjE3Mzc2NDg4NzUsImV4cCI6MTczNzY0OTc3NX0.BgpwOfr2kAy5Q9qivzksSGHQhHHfX1W-yE4RLL3_bhY

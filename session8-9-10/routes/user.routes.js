@@ -10,8 +10,11 @@ const { validateSchema } = require("../middlewares/validate.middleware");
 
 const validateUser = validateSchema(userValidationSchema);
 
+// const authorize = require("../middlewares/authorize-jwt.middleware");
+const authorize = require("../middlewares/authorize-passport.middleware");
+
 router.post("/register", validateUser, postRegister);
 router.get("/all", checkAdminKey, getAllUsers);
-router.get("/:username", getUserByUsername);
+router.get("/:username", authorize, getUserByUsername);
 
 module.exports = router;
